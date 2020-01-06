@@ -1,0 +1,76 @@
+.pb-body
+{
+	background-color: #0E0524 !important;
+
+}
+
+.p1
+{
+	color: #FFFFFF;
+	font-size: 32px !important;
+}
+
+.p2
+{
+	color: #FFFFFF;
+	font-size: 14px;
+}
+
+.img_container
+{
+	height: 500px; 
+	width: 600px; 
+	opacity: 1;
+}
+
+.pb-bottom-nav
+{
+	position: absolute; 
+	bottom: -20px; 
+	background-color: #ABABAB; 
+	width: 100%; 
+	opacity: .1; 
+	height: 0px
+}
+
+.pb-top-nav
+{
+	background-color: #0E0524; 
+	border-bottom: 3px ridge #FFFFFF; 
+	border-width: thin;
+}
+
+.pb-nav-button
+{
+	background-color: #0E0524; 
+	border: none; 
+	font-size: 16px;
+}
+
+.pb-register-btn
+{
+	background-color: #00A2CE; 
+	color: #FFFFFF;
+	border: none; 
+	font-size: 16px; 
+	margin-left: 2%;
+}
+
+
+
+/*GROUP AND EVENT HTML*/
+.info-list
+{
+	position: relative; 
+	bottom: 100px; 
+	left: 200px; 
+	width: 60%;
+}
+
+.join-btn
+{
+	background-color: #00A2CE;
+}
+
+
+

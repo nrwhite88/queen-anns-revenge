@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block head %}
+{{ super() }}
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/profile.css') }}">
+{% endblock %}
+{% block title %}Profile{% endblock %}
+
+{% block page_content %}
+
+<div class="container emp-profile well">
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="profile-img">
+                <img src="{{ avatars.gravatar(email_hash) }}" alt="Avatar"/>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+        	<div class="container"><h2 style="color: #00A2CE">{{ data['First Name'] }} {{ data['Last Name'] }}</h2>
+        			<b>Account Created On:</b> {{ data['Confirm Time']}}
+        	</div>
+				<div class="container">	
+					<ul class="nav nav-tabs">
+						<li class="active">
+			        		<a  href="#1" data-toggle="tab">About me</a>
+						</li>
+						<li>
+							<a href="#2" data-toggle="tab">Events</a>
+						</li>
+					</ul>
+
+					<div class="tab-content ">
+						<div class="tab-pane active" id="1">
+			          		<table class="table" style="border: 2px solid white; margin-bottom: 100px">
+								<tr>
+								<th scope="row">Email</th>
+									<td>{{ data['Email'] }}</td>
+								</tr>
+								<tr>
+								<th scope="row">Major</th>
+									<td>{{ data['Major'] }}</td>
+								</tr>
+								{% if data['Birthday'] != None %}
+								<tr>
+								<th scope="row">Birthday</th>
+									<td>{{ data['Birthday'] }}</td>
+								</tr>
+								{% endif %}
+								{% if data['Bio'] != None %}
+								<tr>
+								<th scope="row">Bio</th>
+									<td>{{ data['Bio'] }}</td>
+								</tr>
+								{% endif %}
+
+			          		</table>
+						</div>
+						<div class="tab-pane" id="2" style="overflow-y: scroll; height: 150px;">
+							<table class="table" style="border: 2px solid white; margin-bottom: 100px;">
+								{% for data in event_data %}
+								<tr>
+								<th scope="row">{{ data[1] }}</th>
+									<td><button onclick="location.href='/event/{{ data[0] }}'">
+										<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+										</button>
+									</td>
+								</tr>
+								{% endfor %}
+			          		</table>
+						</div>
+					</div>
+			  </div>
+
+		</div>
+    </div>
+    <!--
+    <div class="row">
+	    <div class="col">
+			<form method="post" action="/myprofile" enctype="multipart/form-data">
+			   <div style="margin-top:50px">
+			   	<label for="inputIMG"> Change Image </label>
+			    <input type="file" name="file">
+				</div>
+			    <button type="submit">Upload</button>
+			</form>
+		</div>
+	</div>
+	-->
+</div>
+{% endblock %}

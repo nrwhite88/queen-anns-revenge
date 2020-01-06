@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Event{% endblock %}
+
+{% block head %}
+{{ super() }}
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+{% endblock %}
+
+{% block page_content %}
+<div class="container" style="padding-bottom: 150px; overflow-y: scroll;">
+	<div class="row">
+		<div class="col">
+			<table class="table" style="border: 2px solid white;">
+
+				<tbody>
+					{% for info in infos %}
+						<tr>
+							<th scope="row">Current Title</th>
+							<td>{{ info[0] }}</td>
+						</tr>
+
+						<tr>
+							<th scope="row">Current Primary Tag</th>
+							<td>{{ info[2] }}</td>
+						</tr>
+						<tr>
+							<th scope="row">Current Secondary Tag(s)</th>
+							<td>{{ info[3] }}</td>
+						</tr>
+						<tr>
+							<th scope="row">Current Description</th>
+							<td>{{ info[1] }}</td>
+						</tr>
+
+						<tr>
+							<th scope="row">Is The Group Currently Private?</th>
+							<td>{% if info[8] %}Yes{% else %}No{% endif %}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
+		</div>
+		
+		<div class="col">
+			<div class="container well" style="width: auto; height: 550px">
+				<div style="text-align: center;">
+					{{ wtf.quick_form(form) }}
+				</div>
+			</div>
+		</div>
+</div>
+{% endblock %}

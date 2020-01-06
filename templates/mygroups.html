@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Home{% endblock %}
+
+{% block head %}
+{{ super() }}
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+{% endblock %}
+
+{% block page_content %}
+
+<div style="font-size: 26px; font-weight: bold; margin-top: -20px; color: #c61d1d"> 
+  {% with message = get_flashed_messages() %}
+      {% if message %}
+      {% for mess in message %} {{ mess }} {% endfor %} 
+      {% endif %} 
+  {% endwith %} 
+</div>
+<table class="table" style="border: 2px solid white;">
+  <thead>
+    <tr>
+      <th scope="col">Group Name</th>
+      <th scope="col">Group Description</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    	{% for group in data %}
+    		<tr>
+      		<th scope="row"> {{ group[0] }}</th>
+      			<td>{{ group[1] }}</td>
+            <td>
+              <button type="button" class="btn btn-default btn-lg" onclick="window.location.href='{{ url_for( 'delete_group' , groupid=group[2] ) }}'">
+              <span class="glyphicon glyphicon-trash" aria-hidden="true">  
+              </span></button>
+
+              <button onclick="location.href='/view_group/{{ group[2] }}'"> 
+              <span class="glyphicon glyphicon-eye-open" aria-hidden="true">  
+              </span></button>
+        </tr>
+      	{% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+
+

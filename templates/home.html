@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Home{% endblock %}
+
+{% block head %}
+{{ super() }}
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link href="http://fonts.googleapis.com/css?family=Corben" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block page_content %}
+<form method="POST" style="margin-left: 700px; z-index: 9999; top:15px; white-space: nowrap; position: absolute;"  class="form-inline my-2 my-lg-0">
+     <dl>
+         {{  wtf.form_field(form.search, style="height:35px; width:300px") }}
+      </dl>
+      <p><input type=submit value=Search style="background-color:  #00A2CE; color: white; height:35px">
+</form>
+
+
+
+<div class="container">
+	<h1 style="text-align: center; color: black"> UPCOMING EVENTS </h1>
+		<div class="row" style="margin-top: 3%">{% for event in event_data %}<div class="column"  style="overflow:auto, height:50px; margin-left: 1%; margin-right: 1%;"> 
+			<div class="card" style="background-color: #DFDFDF; margin-left: 33%; margin-top: 1%; width: 300px; height: 300px; border: 3px inset; box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.2); border-radius: 20px 20px 20px 20px;">
+				<h2 style="text-align: center; color:#5e9eed; padding:5%;">{{ event[1] }} </h2>
+				<p style="margin-top: 5%; text-align: center"><b style="color:#dd4646"> Start Time: </b><br><b> {{ event[2] }} </b></p>
+				<p style="margin-top: 5%; text-align: center"><b style="color:#dd4646"> End Time:</b><br><b> {{ event[3] }} </b></p>
+				<p style="margin-top: 5%; text-align: center"><b style="color:#dd4646"> Event Description:</b><b> <br>{{ event[4] }} </b></p>
+				<p align="center" style="margin-top: 8%"><a class="btn my-2 my-sm-0" style="background-color: #00A2CE; color: #FFFFFF" href="/event/{{ event[0] }}">Go</a></p>
+			</div>
+		</div>
+{% endfor %}	
+
+
+<div class="container">
+	<h1 style="text-align: center; color: black; margin-top: 5%;"> INTEREST GROUPS </h1>
+		<div class="row" style="margin-top: 3%">{% for group in group_data %}<div class="column"  style="overflow:auto, height:50px; margin-left: 1%; margin-right: 1%;">
+			<div class="card" style="background-color: #DFDFDF; margin-left: 33%; margin-top: 1%; width: 300px; height: 200px; border: 3px inset; box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.2); border-radius: 20px 20px 20px 20px;">
+			<h2 style="text-align: center; color:#5e9eed; padding: 5%;">{{ group[1] }} </h2>
+			<p style="margin-top: 5%; text-align: center"><b style="color:#dd4646"> Description: </b><br><b> {{ group[2] }} </b></p>
+			<p align="center" style="margin-top: 8%"><a class="btn my-2 my-sm-0" style="background-color: #00A2CE; color: #FFFFFF" href="/view_group/{{ group[0] }}">Go</a></p>
+			</div>
+		</div>
+																																																				{% endfor %}	
+
+
+
+																																																																		<div class="container">
+																																																																				<h1 style="text-align: center; color: black; margin-top: 5%;"> PEOPLE YOU MAY KNOW </h1>
+																																																																					<div class="row" style="margin-top: 3%; margin-bottom: 12%;">
+																																																																								{% for user in user_data %}
+																																																																										<div class="column"  style="overflow:auto, height:50px; margin-left: 1%; margin-right: 1%;">
+																																																																														<div class="card" style="background-color: #DFDFDF; margin-left: 33%; margin-top: 1%; width: 300px; height: 325px; border: 3px inset; box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.2); border-radius: 20px 20px 20px 20px;">
+																																																																																			<h2 style="text-align: center; color:#5e9eed; padding: 3%;">{{ user[1] }} {{user[2]}}  </h2>
+																																																																																							<p><center><img src="https://dysismedical.com/wp-content/uploads/2015/02/anonymous-person.png" width=100px; height=100px; alt="Avatar"></center></p>
+																																																																																											<p style="margin-top: 5%; text-align: center"><b style="color:#dd4646"> Major: </b><br><b> {{ user[3] }} </b></p>
+																																																																																															<p style="margin-top: 5%; text-align: center"><b style="color:#dd4646"> </b><br><b> {{ user[4] }} </b></p>
+																																																																																																			<p align="center" style="padding: 3%;"><a class="btn my-2 my-sm-0" style="background-color: #00A2CE; color: #FFFFFF" href="/profile/{{ user[5] }}">Go</a></p>
+																														</div>
+																																</div>
+																																	{% endfor %}	
+
+																																	{% endblock %}
+

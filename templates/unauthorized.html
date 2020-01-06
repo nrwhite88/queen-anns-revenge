@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Unauthorized access{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+	 <h1>You attempted to access an admin-only area.</h1>
+</div>
+{% endblock %}

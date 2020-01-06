@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+{% block page_content %}
+<div class="container" style="position: relative; border: 2px solid black; width: 400px; height: 285px;margin-top: 6%; text-align: center;">
+      <h1 style = "color:#00A2CE"><b> Password Reset </b></h1>
+      <h1 style = "color:black"><b> {% if message %} {{message}} {% else %}{% endif %}</b></h1>
+      <div style="margin-top: 8%; width: 80%; display: inline-block; font-size: 14px">
+
+			{{ wtf.quick_form(form) }}
+
+      </div>
+	
+	  <div class="container" style="width: 150px; margin-top: 10px">
+			<a style="color:blue; font-size: 14px" href= "{{ url_for('login') }}" > Login </a>
+	  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Search{% endblock %}
+
+
+{% block head %}
+{{ super() }}
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+{% endblock %}
+
+
+{% block page_content %}
+
+{% if user_results %}
+<br>
+<hr size="30">
+<div class="page-container">
+<h1>Users</h1>
+<table class="table" style="border: 2px solid white; margin-bottom: 100px">
+  <thead>
+    <tr>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    	{% for user in user_results %}
+    		<tr>
+      		<th scope="row"> {{ user[1] }}</th>
+      <td>{{ user[2] }}</td>
+      <td><a class="btn my-2 my-sm-0" style="background-color: #00A2CE; color: #FFFFFF" href="/profile/{{ user[0] }}">Go</a></td>
+        </tr>
+      	{% endfor %}
+  </tbody>
+</table>
+</div>
+{% endif %}
+
+{% if event_results %}
+<hr size="30">
+<div class="page-container">
+<h1>Events</h1>
+<table class="table" style="border: 2px solid white; margin-bottom: 100px">
+  <thead>
+    <tr>
+      <th scope="col">Event Name</th>
+      <th scope="col">Location</th>
+      <th scope="col">Start Time</th>
+      <th scope="col">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    	{% for event in event_results %}
+    		<tr>
+      		<th scope="row"> {{ event[1] }}</th>
+      <td>{{ event[2] }}</td>
+      <td>{{ event[3] }}</td>
+      <td>{{ event[4] }}</td>
+      <td><a class="btn my-2 my-sm-0" style="background-color: #00A2CE; color: #FFFFFF" href="/event/{{ event[0] }}">Go</a></td>
+        </tr>
+      	{% endfor %}
+  </tbody>
+</table>
+</div>
+{% endif %}
+
+{% if group_results %}
+<hr size="30">
+<div class="page-container">
+<h1>Groups</h1>
+<table class="table" style="border: 2px solid white; margin-bottom: 100px">
+  <thead>
+    <tr>
+      <th scope="col">Group Name</th>
+      <th scope="col">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    	{% for group in group_results %}
+    		<tr>
+      		<th scope="row"> {{ group[1] }}</th>
+      <td>{{ group[2] }}</td>
+      <td><a class="btn my-2 my-sm-0" style="background-color: #00A2CE; color: #FFFFFF" href="/view_group/{{ group[0] }}">Go</a></td>
+        </tr>
+      	{% endfor %}
+  </tbody>
+</table>
+</div>
+{% endif %}
+
+
+{% endblock %}

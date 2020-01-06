@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Flask Login{% endblock %}
+
+{% block page_content %}
+
+<div class="container" style="position: relative; border: 1px solid white; width: 400px; margin-top: 3%; text-align: center;">
+	<form method="POST" action="{{ url_for('createEvent') }}">
+		{{ form.hidden_tag() }}
+		{{ form.csrf_token }}
+		<div>
+			<h1 style="padding-top: 5%; color: #FFFFFF; mar">Add Event</h1>
+			
+		</div>
+
+			<div style="margin-top: 5%; width: 80%; display: inline-block">
+				{{ wtf.form_field(form.name) }}
+        {{ wtf.form_field(form.location) }}
+				{{ wtf.form_field(form.starttime) }}
+				{{ wtf.form_field(form.endtime) }}
+			  {{ wtf.form_field(form.primary_tag) }}
+				{{ wtf.form_field(form.secondary_tags) }}
+				{{ wtf.form_field(form.description) }}
+				{{ wtf.form_field(form.max_attendees) }}
+				{{ wtf.form_field(form.is_private) }}
+			</div>
+			
+			<div class="container" style="width: 100px; margin-top: 40px">
+				<input type="submit" class="btn" style="margin-bottom: 20%; background-color: #00A2CE; color: #FFFFFF;" value="Create Event">
+        
+{% endblock %}

@@ -1,0 +1,118 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}Pirate Bay{% endblock %}
+
+{% block styles %}
+{{super()}}
+<style type="text/css">
+  body 
+  { 
+    background-color: #8A8A8A !important;
+  }
+
+a.dropdown-item:hover{
+	background-color: rgba(117,117,117,0.3);
+}
+
+
+</style>
+{% endblock %}
+
+{% block head %}
+{{ super() }}
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/piratebay.css') }}">
+{% endblock %}
+
+{% block navbar %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="position: relative; opacity: .8">
+  <a class="navbar-brand" href="/home" style="color: #00A2CE">Pirate Bay</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto" style="font-size: 16px">
+      <li class="nav-item active"> 
+        <a class="nav-link" href="/home">Home</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Events
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/eventadd">Create Event</a>
+          <a class="dropdown-item" href="/viewevents"> View Events</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Edit Events</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Groups
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Create Group</a>
+          <a class="dropdown-item" href="#">View Groups</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Edit Groups</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="/admin_only">Admin</a>
+      </li>
+    </ul>
+    <div style="margin-right: 17%">
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn my-2 my-sm-0" type="submit" style="background-color: #00A2CE; color: #FFFFFF">Search</button>
+      </form>
+    </div>
+    <div style="margin-right: 2%">
+      <button class="nav-item dropdown btn" style="background-color: #00A2CE">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #FFFFFF">
+          Profile
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/profile/">View Profile</a>
+          <a class="dropdown-item" href="/editprofile"> Edit Profile</a>
+          <a class="dropdown-item" href="/myevents"> My Events</a>
+          <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/logout">Logout</a>
+        </div>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="position: fixed; opacity: .9; bottom: 0; width: 100%; margin-bottom: 0%">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto" style="font-size: 16px;">
+      <li class="nav-item active"> 
+        <a class="nav-link" href="#">About Us</a>
+      </li>
+      <li class="nav-item active"> 
+        <a class="nav-link" href="#">Contact</a>
+      </li>
+      <li class="nav-item active"> 
+        <a class="nav-link" href="#">Terms of Service</a>
+      </li>
+    </ul>
+  </div>
+
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% block page_content %}{% endblock %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{{ moment.include_moment() }}
+{% endblock %}
+

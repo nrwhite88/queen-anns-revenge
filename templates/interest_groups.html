@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title%}Create Interest Group{% endblock %}
+
+{% block page_content %}
+<div class="container" style="position: relative; border: 1px solid white; width: 400px; margin-top:6%; text-align:center;">
+	<h1 style="padding-top: 5%; color: #FFFFFF; mar">{% if success %}{{name}} has been added to the database.{% else  %}Please enter group details:{% endif %}</h1>
+{{ wtf.quick_form(form) }}
+</div>
+{% endblock %}

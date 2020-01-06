@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Home{% endblock %}
+
+{% block head %}
+{{ super() }}
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+{% endblock %}
+
+{% block page_content %}
+<table class="table" style="border: 2px solid white; margin-bottom: 100px">
+  <thead>
+    <tr>
+      <th scope="col">Event Name</th>
+      <th scope="col">Location</th>
+      <th scope="col">Start Time</th>
+      <th scope="col">End Time</th>
+      <th scope="col">View Event</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    	{% for event in data %}
+    		<tr>
+      		<th scope="row"> {{ event[1] }}</th>
+          <td>{{ event[2] }}</td>
+    			<td>{{ event[3] }}</td>
+    			<td>{{ event[4] }}</td>
+          <td>
+            <button onclick="location.href='/event/{{ event[0] }}'">
+            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+            </button>
+          </td>
+        </tr>
+      	{% endfor %}
+  </tbody>
+</table>
+{% endblock %}

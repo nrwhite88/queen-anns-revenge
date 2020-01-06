@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Event{% endblock %}
+
+{% block head %}
+{{ super() }}
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+{% endblock %}
+
+{% block page_content %}
+<div class="container" style="position: relative; border: 1px solid black; width: 400px; height: 450px; margin-top: 6%; text-align: center;">
+	<form method="POST" action="{{ url_for('edit_profile') }}">
+		{{ form.hidden_tag() }}
+		{{ form.csrf_token }}
+		<div>
+			<h1 style="padding-top: 5%; color: #000000; mar">Edit Profile</h1>
+		</div>
+
+			<div style="margin-top: 10%; width: 80%; display: inline-block">
+				{{ wtf.form_field(form.first_name) }}
+				{{ wtf.form_field(form.last_name) }}
+				{{ wtf.form_field(form.major)  }}
+				{{ wtf.form_field(form.birthday) }}
+				{{ wtf.form_field(form.user_bio) }}
+
+			</div>
+			
+			<div class="container" style="width: 100px; margin-top: 40px">
+				<input type="submit" class="btn" style="margin-bottom: 40%; background-color: #00A2CE; color: #FFFFFF;" value="Submit">
+			</div>
+	</form>
+</div>{% endblock %}
+
+

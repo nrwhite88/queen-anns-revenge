@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Event{% endblock %}
+
+{% block head %}
+{{ super() }}
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/piratebay.css') }}">
+{% endblock %}
+
+{% block page_content %}
+<div class="container">
+	<div class="row">
+		<div class="col">
+		<div class="panel panel-default" style="height: 450px">
+			<div class="panel-heading">
+			<h3 class="panel-title">{{ data[1] }}</h3>
+			</div>
+		<div class="panel-body" style="">
+			<div class="profile-img" style="">
+				<img src="/static/avatar.png" alt="Avatar" />
+			</div>
+			
+		<div class="col">
+			<div class="info-list">
+				<ul class="list-group">
+					<li class="list-group-item" style="overflow-y: hidden;">
+						<p><b>Description:</b> {{ data[5] }} </p>
+					</li>
+					<li class="list-group-item">
+						<p><b>Location:</b> {{ data[2] }} </p>
+					</li>
+					<li class="list-group-item">
+						<p><b>Start Time:</b> {{ data[3] }} </p>
+					</li>
+					<li class="list-group-item">
+						<p><b>End Time:</b> {{ data[4] }} </p>
+					</li>
+					<li class="list-group-item">
+						<p><b>Coordinator:</b> <a href="/profile/{{ data[7] }}">{{ data[6] }}</a></p>
+					</li>
+					<li class="list-group-item">
+						<p><b>Max Attendees:</b> {{ data[8] }} </p>
+					</li>
+					<li class="list-group-item">
+						<p><b>Private Event?:</b> {% if data[9] %}Yes{% else %}No{% endif %} </p>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+			<div class="col">
+				<div style="position: relative; bottom: 390px; width: 20%; left: 80%; overflow-y: scroll; height: 200px;">
+					<ul>
+						<li class="list-group-item" style="background-color: #F1F1F1; text-align: center;">
+							<b>Attendees</b>
+						</li>
+						{% for userinfo in users %}
+						<li class="list-group-item">{{ userinfo }}</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+			{% if usercheck == True %}
+			<div style="position: relative; left: 93%; bottom: 17%">
+				{{ wtf.quick_form(leave) }}
+			</div>
+
+			{% else %}
+			<div style="position: relative; left: 93%; bottom: 17%">
+				{{ wtf.quick_form(form) }}
+			</div>
+
+			{% endif %}
+
+			{% if button==True and usercheck == True %}
+			<div style="position: relative; left: 90%; bottom: 15%;">
+			<button onclick="location.href='/edit_event/{{ data[0] }}'">
+				<span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit Event
+			</button>
+			</div>
+
+			<!--Can't find a good spot to place this 
+			<div style="position: relative; left: 90%; bottom: 19%;">
+				{{ wtf.quick_form(delform) }}
+			</div>
+			-->
+			{% endif %}
+</div>
+</div>
+</div>
+
+<div class="container">
+	<div class="panel panel-default well" style="overflow-y: scroll; height:400px; margin-bottom: 200px">
+		<div class="panel-body">
+			<div>
+			{% for entry in entries %}
+			<p><b>Posted by</b>: {{ entry[1] }} {{ entry[2] }}</p>
+			<div style="position: relative; bottom: 25px; left: 90%">
+			{{ entry[3] }}
+			</div>
+			<div>
+			{{ entry[0] }}
+			</div>
+			<hr>
+			<br>
+			<br>
+
+			{% endfor %}
+			</div>
+
+			<div style="width: 13%; position: relative;	">
+			{{ wtf.quick_form(cform)}}
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+

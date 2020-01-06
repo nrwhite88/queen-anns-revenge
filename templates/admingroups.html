@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Admin area{% endblock %}
+
+{% block head %}
+{{ super() }}
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+{% endblock %}
+
+{% block page_content %}
+<div class="container" style="padding-bottom: 80px">
+  <div style="font-size: 20px; font-weight: bold; margin-top: -20px; color: #c61d1d"> 
+    {% with message = get_flashed_messages() %}
+    {% if message %}
+    {% for mess in message %} {{ mess }} {% endfor %} 
+    {% endif %} 
+    {% endwith %} 
+  </div>
+
+  <div class="page-header well" style="border: 1px solid black; text-align: center">
+  {% if current_user.is_authenticated %}
+
+  <a style="color:#00A2CE" href="{{ url_for('admin_only') }}"><h1><b>Admin area</b></h1></a>
+  <a style="color:#00A2CE; font-size: 20px" href= "{{ url_for('adminEvents') }}"> View Events </a>
+  <a style="color:#00A2CE; font-size: 20px; margin-left: 30px" href= "{{ url_for('adminGroups') }}"> View Groups </a>
+
+  {% endif %}
+
+  </div>
+
+  <div style="overflow: auto; width: auto; height:250px; border: 2px solid black; background-color: #F6F6F6">
+    <table class="table" style="border: 2px solid white;"> 
+      <thead>
+        <tr>
+          <th scope="col">Group ID</th>
+          <th scope="col">Group Name</th>
+          <th scope="col">Group Creator</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for group in all_groups %}
+          <tr>  
+            <th scope="row">{{ group[0] }}</th>
+            <td> <a style = "color:black;" href="/view_group/{{ group[0] }}">{{ group[1] }}</a></td>
+            <td>{{ group[2] }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="well" style="margin-top: 2%; margin-left: 333px; width: 25%; display: inline-block; border: 2px solid black; text-align: center;">
+        {{ wtf.quick_form(form) }}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

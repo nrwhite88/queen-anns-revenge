@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Event{% endblock %}
+
+{% block page_content %}
+<div>
+	<h1>{{eventname}}</h1>
+	<br/>
+	<h2>Starttime: {{eventstart}}</h2>
+	<br/>
+	<h2>Endtime: ((eventend}}</h2>
+	<br/>
+	<h2>Description: {{eventdescription}}</h2>
+</div>
+{% endblock %}

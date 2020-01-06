@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Login{% endblock %}
+
+{% block page_content %}
+<div class="container well" style="position: relative; border: 1px solid black; width: 400px; height: 380px; margin-top: 6%; text-align: center;">
+	<form method="POST" action="{{ url_for('login') }}">
+		{{ form.hidden_tag() }}
+		{{ form.csrf_token }}
+		<div>
+			<h1 style="padding-top: 5%; color: #000000; mar">Login</h1>
+			<h1 style="color:#2c4da3"> {% if check_banned %} <b>Your Account Has Been Permanently Banned </b>{% else %}{% endif %} </h1>
+		</div>
+
+			<div style="margin-top: 10%; width: 80%; display: inline-block">
+				{{ wtf.form_field(form.user_email) }}
+				{{ wtf.form_field(form.password) }}
+			</div>
+			
+			<div class="container" style="width: 100px; margin-top: 40px">
+				<input type="submit" class="btn" style="margin-bottom: 40%; background-color: #00A2CE; color: #FFFFFF;" value="Login">
+			</div>
+
+			<div class="container" style="width: 250px; margin-top: -15px">
+				<a style="color:#0000ff; font-size: 14px" href= "{{ url_for('forgot_pass') }}" > Forgot Password? </a><br>
+				<a style="color:#0000ff; font-size: 14px" href= "{{ url_for('register') }}" > Dont Have an Account? Create One </a>
+			</div>
+	</form>
+</div>
+
+{% endblock %}
